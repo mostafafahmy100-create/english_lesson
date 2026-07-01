@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinguaB1 – English Verbs Mastery</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cairo:wght@400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+  --bg: #0d0f14;
+  --surface: #161921;
+  --surface2: #1e2330;
+  --surface3: #252b3b;
+  --border: #2a3147;
+  --border2: #353d54;
+  --text: #e8eaf0;
+  --text2: #9aa3bc;
+  --text3: #5c657d;
+  --accent: #6c63ff;
+  --accent2: #8b84ff;
+  --accent-glow: rgba(108,99,255,0.18);
+  --green: #22c55e;
+  --green-dim: rgba(34,197,94,0.12);
+  --red: #ef4444;
+  --red-dim: rgba(239,68,68,0.12);
+  --gold: #f59e0b;
+  --gold-dim: rgba(245,158,11,0.12);
+  --cyan: #06b6d4;
+  --cyan-dim: rgba(6,182,212,0.12);
+  --pink: #ec4899;
+  --pink-dim: rgba(236,72,153,0.1);
+  --r: 12px;
+  --r2: 8px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* ── SIDEBAR LAYOUT ── */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 240px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 100;
+  overflow-y: auto;
+}
+.sidebar-logo {
+  padding: 22px 20px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.logo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 900;
+  font-size: 1.1rem;
+  letter-spacing: -0.5px;
+}
+.logo-icon {
+  width: 32px; height: 32px;
+  background: var(--accent);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+}
+.logo-level {
+  font-size: 0.65rem;
+  background: var(--gold-dim);
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-weight: 700;
+  margin-top: 4px;
+  display: inline-block;
+}
+
+.sidebar-nav { padding: 12px 10px; flex: 1; }
+.nav-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 8px 10px 4px;
+}
+
+.session-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--r2);
+  border: none;
+  background: transparent;
+  color: var(--text2);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s;
+  margin-bottom: 2px;
+}
+.session-btn:hover { background: var(--surface2); color: var(--text); }
+.session-btn.active {
+  background: var(--accent-glow);
+  color: var(--accent2);
+  font-weight: 700;
+}
+.session-btn .s-dot {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  background: var(--surface3);
+}
+.session-btn.active .s-dot { background: var(--accent-glow); }
+.s-info { flex: 1; }
+.s-title { font-size: 0.78rem; line-height: 1.2; }
+.s-sub { font-size: 0.65rem; color: var(--text3); margin-top: 1px; }
+.session-btn.active .s-sub { color: var(--accent); opacity: 0.8; }
+
+/* progress ring mini */
+.s-prog { font-size: 0.65rem; color: var(--text3); font-weight: 700; }
+.session-btn.active .s-prog { color: var(--gold); }
+
+/* MAIN */
+.main-content {
+  margin-left: 240px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TOP BAR */
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-title { font-weight: 800; font-size: 1rem; }
+.topbar-sub { font-size: 0.75rem; color: var(--text2); font-family: 'Cairo', sans-serif; }
+.topbar-right { margin-left: auto; display: flex; gap: 10px; align-items: center; }
+.xp-pill {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--gold-dim);
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+.streak-pill {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--pink-dim);
+  border: 1px solid var(--pink);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--pink);
+}
+
+/* CONTENT AREA */
+.content-area { padding: 24px 28px 60px; max-width: 900px; }
+
+.session-panel { display: none; }
+.session-panel.active { display: block; }
+
+/* SESSION HERO */
+.session-hero {
+  border-radius: var(--r);
+  padding: 24px 28px;
+  margin-bottom: 22px;
+  position: relative;
+  overflow: hidden;
+}
+.session-hero::before {
+  content: attr(data-label);
+  position: absolute;
+  right: 20px; top: 20px;
+  font-size: 5rem;
+  opacity: 0.06;
+  font-weight: 900;
+  line-height: 1;
+}
+.hero-tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0.8;
+  margin-bottom: 8px;
+}
+.hero-title { font-size: 1.5rem; font-weight: 900; margin-bottom: 6px; }
+.hero-desc { font-family: 'Cairo', sans-serif; font-size: 0.88rem; opacity: 0.85; }
+.hero-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.hero-chip {
+  background: rgba(255,255,255,0.12);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+.hero-progress {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero-progress-bar {
+  flex: 1;
+  height: 4px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.hero-progress-fill {
+  height: 100%;
+  background: white;
+  border-radius: 999px;
+  width: 0%;
+  transition: width 0.5s ease;
+}
+.hero-progress-label { font-size: 0.7rem; opacity: 0.7; white-space: nowrap; }
+
+/* MODULE CARDS */
+.module-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  margin-bottom: 14px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.module-card:hover { border-color: var(--border2); }
+.module-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  cursor: pointer;
+  user-select: none;
+}
+.module-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+.module-meta { flex: 1; }
+.module-name { font-weight: 700; font-size: 0.92rem; }
+.module-desc { font-size: 0.73rem; color: var(--text2); font-family: 'Cairo', sans-serif; margin-top: 2px; }
+.module-arrow {
+  color: var(--text3);
+  font-size: 0.8rem;
+  transition: transform 0.25s;
+}
+.module-card.open .module-arrow { transform: rotate(180deg); }
+.module-body {
+  display: none;
+  padding: 0 20px 20px;
+  border-top: 1px solid var(--border);
+}
+.module-card.open .module-body { display: block; }
+
+/* ── VOCABULARY ── */
+.vocab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+.vocab-tile {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+.vocab-tile:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(108,99,255,0.15); }
+.vocab-tile:active { transform: scale(0.97); }
+.vocab-tile.playing { border-color: var(--cyan); background: var(--cyan-dim); }
+.vt-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 6px; }
+.vt-word { font-weight: 800; font-size: 1rem; font-family: 'JetBrains Mono', monospace; color: var(--text); }
+.vt-play { width: 26px; height: 26px; border-radius: 50%; background: var(--surface3); border: none; color: var(--text2); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; flex-shrink: 0; transition: all 0.15s; }
+.vt-play:hover { background: var(--accent); color: white; }
+.vt-ipa { font-size: 0.65rem; color: var(--text3); margin-top: 3px; font-family: 'JetBrains Mono', monospace; }
+.vt-ar { font-family: 'Cairo', sans-serif; font-size: 0.82rem; color: var(--text2); margin-top: 6px; font-weight: 600; }
+.vt-example { font-size: 0.72rem; color: var(--text3); margin-top: 5px; font-style: italic; line-height: 1.4; }
+.vt-tag {
+  position: absolute;
+  top: 8px; right: 8px;
+  font-size: 0.55rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── READING ── */
+.reading-panel { margin-top: 14px; }
+.read-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 10px 14px;
+  background: var(--surface2);
+  border-radius: var(--r2) var(--r2) 0 0;
+  border: 1px solid var(--border);
+  border-bottom: none;
+}
+.rt-label { font-size: 0.7rem; font-weight: 700; color: var(--text3); margin-right: 4px; }
+.rt-btn {
+  display: flex; align-items: center; gap: 5px;
+  background: var(--surface3);
+  border: 1px solid var(--border2);
+  color: var(--text2);
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.rt-btn:hover { background: var(--accent); border-color: var(--accent); color: white; }
+.rt-btn.danger:hover { background: var(--red); border-color: var(--red); color: white; }
+.rt-btn.active-speed { background: var(--accent); border-color: var(--accent); color: white; }
+.rt-divider { width: 1px; height: 20px; background: var(--border); }
+
+.reading-text-box {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 0 0 var(--r2) var(--r2);
+  padding: 20px;
+}
+.reading-text {
+  font-size: 1rem;
+  line-height: 2.2;
+  color: var(--text);
+}
+.reading-text .sentence {
+  display: inline;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 2px 3px;
+  transition: background 0.15s;
+  position: relative;
+}
+.reading-text .sentence:hover { background: rgba(108,99,255,0.15); }
+.reading-text .sentence.highlighted { background: rgba(108,99,255,0.25); }
+
+.word-clickable {
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 0 1px;
+  transition: background 0.12s;
+  display: inline;
+}
+.word-clickable:hover { background: rgba(6,182,212,0.2); }
+.word-clickable.speaking { background: rgba(245,158,11,0.3); }
+
+.translation-box {
+  margin-top: 12px;
+  background: var(--surface3);
+  border: 1px solid var(--border2);
+  border-radius: var(--r2);
+  padding: 12px 16px;
+}
+.tb-label { font-size: 0.65rem; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.tb-text { font-family: 'Cairo', sans-serif; font-size: 0.88rem; color: var(--text2); line-height: 1.8; direction: rtl; text-align: right; }
+
+/* sentence tooltip */
+.sentence-tip {
+  background: var(--surface3);
+  border: 1px solid var(--border2);
+  border-radius: var(--r2);
+  padding: 8px 12px;
+  margin-top: 8px;
+  display: none;
+  animation: fadeIn 0.15s ease;
+}
+.sentence-tip.show { display: block; }
+.st-en { font-size: 0.82rem; font-weight: 600; color: var(--text); }
+.st-ar { font-family: 'Cairo', sans-serif; font-size: 0.82rem; color: var(--text2); margin-top: 4px; direction: rtl; text-align: right; }
+.st-play-btn {
+  margin-top: 6px;
+  background: var(--accent);
+  border: none;
+  color: white;
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+
+@keyframes fadeIn { from{opacity:0;transform:translateY(-4px)} to{opacity:1;transform:translateY(0)} }
+
+/* ── LISTENING ── */
+.listening-panel { margin-top: 14px; }
+.listen-player {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 14px;
+}
+.listen-title { font-size: 0.72rem; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
+.listen-main-btn {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: none;
+  color: white;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 12px;
+  box-shadow: 0 0 0 0 rgba(108,99,255,0.4);
+}
+.listen-main-btn:hover { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(108,99,255,0.15); }
+.listen-main-btn.playing { animation: ripple 1.5s infinite; }
+@keyframes ripple { 0%,100%{box-shadow:0 0 0 0 rgba(108,99,255,0.4)} 50%{box-shadow:0 0 0 14px rgba(108,99,255,0)} }
+.listen-speeds { display: flex; justify-content: center; gap: 8px; margin-bottom: 14px; }
+.ls-btn {
+  background: var(--surface3);
+  border: 1px solid var(--border2);
+  color: var(--text2);
+  border-radius: 6px;
+  padding: 5px 14px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+}
+.ls-btn:hover, .ls-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+.listen-hint {
+  font-size: 0.75rem;
+  color: var(--text3);
+  font-family: 'Cairo', sans-serif;
+}
+
+.listen-questions { margin-top: 8px; }
+.lq-item {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+.lq-stem { font-size: 0.85rem; font-weight: 600; margin-bottom: 10px; display: flex; gap: 10px; }
+.lq-num { background: var(--accent); color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 800; flex-shrink: 0; margin-top: 2px; }
+.lq-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.lq-opt {
+  background: var(--surface3);
+  border: 1px solid var(--border2);
+  border-radius: var(--r2);
+  padding: 9px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--text2);
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+}
+.lq-opt:hover { border-color: var(--accent); color: var(--accent2); background: var(--accent-glow); }
+.lq-opt.correct { background: var(--green-dim); border-color: var(--green); color: var(--green); }
+.lq-opt.wrong { background: var(--red-dim); border-color: var(--red); color: var(--red); }
+.lq-feedback { margin-top: 8px; font-size: 0.78rem; display: none; font-family: 'Cairo', sans-serif; }
+.lq-feedback.show { display: block; }
+
+/* ── GRAMMAR ── */
+.grammar-panel { margin-top: 14px; }
+.grammar-intro {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--r2);
+  padding: 12px 16px;
+  font-size: 0.82rem;
+  color: var(--text2);
+  font-family: 'Cairo', sans-serif;
+  margin-bottom: 14px;
+  direction: rtl;
+  text-align: right;
+}
+.rule-block {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.rule-block-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.rule-pill {
+  background: var(--accent-glow);
+  border: 1px solid var(--accent);
+  color: var(--accent2);
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  white-space: nowrap;
+}
+.rule-title-text { font-size: 0.82rem; font-weight: 700; }
+.rule-title-ar { font-family: 'Cairo', sans-serif; font-size: 0.75rem; color: var(--text2); margin-top: 1px; }
+.rule-block-body { padding: 14px 16px; }
+.formula-box {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  color: var(--cyan);
+  margin-bottom: 12px;
+}
+.examples-grid { display: flex; flex-direction: column; gap: 6px; }
+.ex-row { display: flex; gap: 8px; align-items: flex-start; }
+.ex-icon { font-size: 0.85rem; flex-shrink: 0; margin-top: 2px; }
+.ex-content { flex: 1; }
+.ex-en {
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.ex-en:hover { opacity: 0.85; }
+.ex-en.good { background: var(--green-dim); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+.ex-en.bad { background: var(--red-dim); color: var(--red); border: 1px solid rgba(239,68,68,0.3); text-decoration: line-through; }
+.ex-ar { font-family: 'Cairo', sans-serif; font-size: 0.75rem; color: var(--text3); margin-top: 3px; direction: rtl; }
+.ex-note {
+  background: var(--gold-dim);
+  border: 1px solid rgba(245,158,11,0.3);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 0.75rem;
+  color: var(--gold);
+  margin-top: 6px;
+  font-family: 'Cairo', sans-serif;
+  direction: rtl;
+  text-align: right;
+}
+
+/* ── DIALOGUE ── */
+.dialogue-panel { margin-top: 14px; }
+.dlg-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.dlg-btn {
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  color: var(--text2);
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+}
+.dlg-btn:hover { background: var(--accent); border-color: var(--accent); color: white; }
+
+.bubble-wrap { display: flex; flex-direction: column; gap: 10px; }
+.bubble-row { display: flex; gap: 10px; align-items: flex-start; }
+.bubble-row.right { flex-direction: row-reverse; }
+.avatar-circle {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.bubble-inner { max-width: 72%; }
+.bubble-speaker { font-size: 0.65rem; font-weight: 700; color: var(--text3); margin-bottom: 4px; }
+.bubble-row.right .bubble-speaker { text-align: right; }
+.bubble-text {
+  border-radius: 16px;
+  padding: 11px 15px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  position: relative;
+}
+.bubble-text:hover { opacity: 0.88; }
+.bubble-text.A { background: var(--surface2); border: 1px solid var(--border); border-radius: 4px 16px 16px 16px; }
+.bubble-text.B { background: var(--accent-glow); border: 1px solid var(--accent); color: var(--accent2); border-radius: 16px 4px 16px 16px; }
+.bubble-play-icon {
+  position: absolute;
+  bottom: 6px; right: 10px;
+  font-size: 0.6rem;
+  opacity: 0.4;
+}
+.bubble-row.right .bubble-play-icon { right: auto; left: 10px; }
+.bubble-tr { font-family: 'Cairo', sans-serif; font-size: 0.75rem; color: var(--text3); margin-top: 4px; line-height: 1.5; }
+.bubble-row.right .bubble-tr { text-align: right; direction: rtl; }
+
+/* sentence meaning popup inline */
+.meaning-popup {
+  background: var(--surface3);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-top: 6px;
+  display: none;
+  font-size: 0.78rem;
+}
+.meaning-popup.show { display: block; }
+.mp-en { font-weight: 700; color: var(--text); }
+.mp-ar { font-family: 'Cairo', sans-serif; color: var(--text2); direction: rtl; margin-top: 3px; }
+.mp-ipa { color: var(--text3); font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; margin-top: 2px; }
+
+/* ── QUESTIONS ── */
+.questions-panel { margin-top: 14px; }
+.q-block {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  margin-bottom: 10px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.q-block.answered-correct { border-color: var(--green); }
+.q-block.answered-wrong { border-color: var(--red); }
+.q-head {
+  padding: 14px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.q-num-badge {
+  background: var(--surface3);
+  color: var(--text2);
+  border-radius: 8px;
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.q-type-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.q-stem-text { font-size: 0.88rem; font-weight: 600; line-height: 1.5; }
+.q-options-grid { padding: 0 16px 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.q-opt-btn {
+  background: var(--surface3);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--text2);
+  font-family: 'Inter', sans-serif;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.q-opt-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent2); background: var(--accent-glow); }
+.q-opt-btn:disabled { cursor: default; }
+.q-opt-btn.correct { background: var(--green-dim); border-color: var(--green); color: var(--green); }
+.q-opt-btn.wrong { background: var(--red-dim); border-color: var(--red); color: var(--red); }
+.opt-letter {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.q-feedback-row {
+  padding: 0 16px 14px;
+  display: none;
+  font-size: 0.8rem;
+  font-family: 'Cairo', sans-serif;
+  direction: rtl;
+  text-align: right;
+  line-height: 1.6;
+}
+.q-feedback-row.show { display: block; }
+.q-feedback-row.ok { color: var(--green); }
+.q-feedback-row.no { color: var(--red); }
+
+/* FILL-IN question */
+.q-fill-wrap { padding: 0 16px 14px; }
+.q-fill-input {
+  width: 100%;
+  background: var(--surface3);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.15s;
+  margin-bottom: 8px;
+}
+.q-fill-input:focus { border-color: var(--accent); }
+.q-fill-input.correct { border-color: var(--green); background: var(--green-dim); color: var(--green); }
+.q-fill-input.wrong { border-color: var(--red); background: var(--red-dim); color: var(--red); }
+.q-check-btn {
+  background: var(--accent);
+  border: none;
+  color: white;
+  border-radius: 8px;
+  padding: 8px 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.q-check-btn:hover { background: var(--accent2); }
+.q-check-btn:disabled { opacity: 0.4; cursor: default; }
+
+/* SCORE BANNER */
+.score-banner {
+  background: linear-gradient(135deg, var(--surface2) 0%, var(--surface3) 100%);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  padding: 20px;
+  text-align: center;
+  margin-top: 16px;
+  display: none;
+}
+.score-banner.show { display: block; }
+.score-circle {
+  width: 70px; height: 70px;
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin: 0 auto 10px;
+  color: var(--accent2);
+}
+.score-label { font-size: 0.82rem; color: var(--text2); font-family: 'Cairo', sans-serif; }
+
+/* WORD TOOLTIP */
+.word-tooltip-global {
+  position: fixed;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: var(--r2);
+  padding: 10px 14px;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  min-width: 140px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+}
+.word-tooltip-global.show { opacity: 1; }
+.wt-word { font-weight: 900; font-size: 0.95rem; font-family: 'JetBrains Mono', monospace; color: var(--text); }
+.wt-ipa { font-size: 0.65rem; color: var(--text3); margin-top: 2px; }
+.wt-ar { font-family: 'Cairo', sans-serif; color: var(--cyan); font-size: 0.82rem; font-weight: 700; margin-top: 4px; }
+.wt-speak { font-size: 0.6rem; color: var(--text3); margin-top: 3px; }
+
+/* mobile hamburger */
+.ham-btn { display: none; background: none; border: none; color: var(--text); font-size: 1.3rem; cursor: pointer; }
+
+@media(max-width:768px) {
+  .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+  .sidebar.open { transform: translateX(0); }
+  .main-content { margin-left: 0; }
+  .ham-btn { display: block; }
+  .content-area { padding: 16px 14px 60px; }
+  .q-options-grid { grid-template-columns: 1fr; }
+  .lq-opts { grid-template-columns: 1fr; }
+  .vocab-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- GLOBAL WORD TOOLTIP -->
+<div class="word-tooltip-global" id="wtg">
+  <div class="wt-word" id="wtg-word"></div>
+  <div class="wt-ipa" id="wtg-ipa"></div>
+  <div class="wt-ar" id="wtg-ar"></div>
+  <div class="wt-speak">🔊 tap to hear</div>
+</div>
+
+<div class="app-shell">
+
+<!-- ══ SIDEBAR ══ -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-badge"><div class="logo-icon">🎯</div> LinguaB1</div>
+    <div class="logo-level">B1 · Intermediate</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-label">Verb Mastery Course</div>
+    <button class="session-btn active" onclick="goSession(0,this)">
+      <div class="s-dot">📗</div>
+      <div class="s-info"><div class="s-title">Perfect Tenses</div><div class="s-sub">have/has + past participle</div></div>
+    </button>
+    <button class="session-btn" onclick="goSession(1,this)">
+      <div class="s-dot">📘</div>
+      <div class="s-info"><div class="s-title">Modal Verbs</div><div class="s-sub">can/could/should/must</div></div>
+    </button>
+    <button class="session-btn" onclick="goSession(2,this)">
+      <div class="s-dot">📙</div>
+      <div class="s-info"><div class="s-title">Continuous Tenses</div><div class="s-sub">was/were + -ing</div></div>
+    </button>
+    <button class="session-btn" onclick="goSession(3,this)">
+      <div class="s-dot">📕</div>
+      <div class="s-info"><div class="s-title">Conditionals</div><div class="s-sub">If clauses + would</div></div>
+    </button>
+  </nav>
+</aside>
+
+<!-- ══ MAIN ══ -->
+<div class="main-content">
+  <div class="topbar">
+    <button class="ham-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+    <div>
+      <div class="topbar-title" id="topbar-title">Session 1 – Perfect Tenses</div>
+      <div class="topbar-sub" id="topbar-sub">اضغط على أي كلمة لسماعها · اضغط على أي جملة لترجمتها</div>
+    </div>
+    <div class="topbar-right">
+      <div class="xp-pill">⭐ <span id="xp-count">0</span> XP</div>
+      <div class="streak-pill">🔥 <span id="streak-count">0</span></div>
+    </div>
+  </div>
+
+  <div class="content-area">
+
+  <!-- ══════════ SESSION 0 – PERFECT TENSES ══════════ -->
+  <div class="session-panel active" id="sp-0">
+    <div class="session-hero" data-label="01" style="background:linear-gradient(135deg,#1e1b4b,#3730a3)">
+      <div class="hero-tag">Session 01 · Grammar Focus</div>
+      <div class="hero-title">Present Perfect Tense</div>
+      <div class="hero-desc">زمن المضارع التام – نتحدث عن تجارب حدثت في وقت غير محدد من الماضي ولها تأثير على الحاضر</div>
+      <div class="hero-chips">
+        <span class="hero-chip">have / has + Past Participle</span>
+        <span class="hero-chip">14 Vocabulary</span>
+        <span class="hero-chip">Listening Quiz</span>
+        <span class="hero-chip">10 Questions</span>
+      </div>
+      <div class="hero-progress">
+        <div class="hero-progress-bar"><div class="hero-progress-fill" id="hp-0"></div></div>
+        <div class="hero-progress-label" id="hpl-0">0 / 10</div>
+      </div>
+    </div>
+
+    <!-- VOCAB -->
+    <div class="module-card open" id="mc-s0-v">
+      <div class="module-header" onclick="toggleMod('mc-s0-v')">
+        <div class="module-icon" style="background:rgba(108,99,255,0.15);color:#8b84ff">📚</div>
+        <div class="module-meta"><div class="module-name">Vocabulary</div><div class="module-desc">14 كلمة – اضغط للسماع والترجمة</div></div>
+        <div class="module-arrow">▾</div>
+      </div>
+      <div class="module-body"><div class="vocab-grid" id="vg-s0"></div></div>
+    </div>
+
+    <!-- READING -->
+    <div class="module-card" id="mc-s0-r">
+      <div class="module-header" onclick="toggleMod('mc-s0-r')">
+        <div class="module-icon" style="background:rgba(6,182,212,0.12);color:#06b6d4">📖</div>
+        <div class="module-meta"><div class="module-name">Reading + Sentence Meaning</div><div class="module-desc">اضغط أي كلمة لمعناها · اضغط الجملة لترجمتها كاملة</div></div>
+        <div class="module-arrow">▾</div>
+      </div>
+      <div class="module-body">
+        <div class="reading-panel">
+          <div class="read-toolbar">
+            <span class="rt-label">🔊 Read Paragraph:</span>
+            <button class="rt-btn" onclick="readFull('rtxt-s0',0.7,this)">🐢 Slow</button>
+            <button class="rt-btn" onclick="readFull('rtxt-s0',1,this)">🚶 Normal</button>
+            <button class="rt-btn" onclick="readFull('rtxt-s0',1.4,this)">⚡ Fast</button>
+            <div class="rt-divider"></div>
+            <button class="rt-btn danger" onclick="stopAll()">■ Stop</button>
+          </div>
+          <div class="reading-text-box">
+            <div class="reading-text" id="rtxt-s0"></div>
+            <div id="sent-tip-s0" class="sentence-tip">
+              <div class="st-en" id="st-en-s0"></div>
+              <div class="st-ar" id="st-ar-s0"></div>
+              <button class="st-play-btn" onclick="speakText(document.getElementById('st-en-s0').textContent,1)">🔊 Listen</button>
+            </div>
+          </div>
+          <div class="translation-box">
+            <div class="tb-label">Arabic Translation · الترجمة</div>
+            <div class="tb-text" id="tr-s0"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LISTENING -->
+    <div class="module-card" id="mc-s0-l">
+      <div class="module-header" onclick="toggleMod('mc-s0-l')">
+        <div class="module-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b">🎧</div>
+        <div class="module-meta"><div class="module-name">Listening Comprehension</div><div class="module-desc">استمع ثم أجب على الأسئلة</div></div>
+        <div class="module-arrow">▾</div>
+      </div>
+      <div class="module-body">
+        <div class="listening-panel">
+          <div class="listen-player">
+            <div class="listen-title">LISTENING TRACK · تتبع الاستماع</div>
+            <button class="listen-main-btn" id="lmb-s0" onclick="playListen('s0', this)">▶</button>
+            <div class="listen-speeds">
+              <button class="ls-btn" onclick="setListenSpeed('s0',0.65,this)">🐢 0.65×</button>
+              <button class="ls-btn active" onclick="setListenSpeed('s0',1,this)">Normal</button>
+              <button class="ls-btn" onclick="setListenSpeed('s0',1.3,this)">⚡ 1.3×</button>
+            </div>
+            <div class="listen-hint">استمع أولاً قبل الإجابة على الأسئلة</div>
+          </div>
+          <div class="listen-questions" id="lq-s0"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRAMMAR -->
+    <div class="module-card" id="mc-s0-g">
+      <div class="module-header" onclick="toggleMod('mc-s0-g')">
+        <div class="module-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b">📐</div>
+        <div class="module-meta"><div class="module-name">Grammar Rules</div><div class="module-desc">قواعد مع أمثلة ✓ و ✗ وشرح بالعربي</div></div>
+        <div class="module-arrow">▾</div>
+      </div>
+      <div class="module-body"><div class="grammar-panel" id="gp-s0"></div></div>
+    </div>
+
+    <!-- DIALOGUE -->
+    <div class="module-card" id="mc-s0-d">
+      <div class="module-header" onclick="toggleMod('mc-s0-d')">
+        <div class="module-icon" style="background:rgba(236,72,153,0.1);color:#ec4899">💬</div>
+        <div class="module-meta"><div class="module-name">Dialogue</div><div class="module-desc">اضغط أي جملة لسماعها وترجمتها – اضغط الزر لسماع كل الحوار</div></div>
+        <div class="module-arrow">▾</div>
+      </div>
+      <div class="module-body"><div class="dialogue-panel" id="dp-s0"></div></div>
+    </div>
+
+    <!-- QUESTIONS -->
+    <div class="module-card" id="mc-s0-q">
+      <div class="module-header" onclick="toggleMod('mc-s0-q')">
+        <div class="module-icon" style="background:rgba(34,197,94,0.1);color:#22c55e">❓</div>
+        <div class="module-meta"><div class="module-name">Practice Questions (10)</div><div class="module-desc">اختيار متعدد + تعبئة الفراغ</div></div>
+        <div class="module-arrow">▾</div>
+      </div>
+      <div class="module-body">
+        <div class="questions-panel" id="qp-s0"></div>
+        <div class="score-banner" id="sb-s0"><div class="score-circle" id="sc-s0"></div><div class="score-label" id="sl-s0"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ SESSION 1 – MODAL VERBS ══════════ -->
+  <div class="session-panel" id="sp-1">
+    <div class="session-hero" data-label="02" style="background:linear-gradient(135deg,#052e16,#166534)">
+      <div class="hero-tag">Session 02 · Modal Verbs</div>
+      <div class="hero-title">Modal Verbs – can / could / should / must</div>
+      <div class="hero-desc">أفعال الوجوب والقدرة والنصيحة – تُعبّر عن الإمكانية والضرورة والنصيحة بأساليب متنوعة</div>
+      <div class="hero-chips">
+        <span class="hero-chip">can · could · should · must · might</span>
+        <span class="hero-chip">14 Vocabulary</span>
+        <span class="hero-chip">Listening Quiz</span>
+        <span class="hero-chip">10 Questions</span>
+      </div>
+      <div class="hero-progress">
+        <div class="hero-progress-bar"><div class="hero-progress-fill" id="hp-1"></div></div>
+        <div class="hero-progress-label" id="hpl-1">0 / 10</div>
+      </div>
+    </div>
+    <div class="module-card open" id="mc-s1-v"><div class="module-header" onclick="toggleMod('mc-s1-v')"><div class="module-icon" style="background:rgba(34,197,94,0.1);color:#22c55e">📚</div><div class="module-meta"><div class="module-name">Vocabulary</div><div class="module-desc">14 كلمة – اضغط للسماع</div></div><div class="module-arrow">▾</div></div><div class="module-body"><div class="vocab-grid" id="vg-s1"></div></div></div>
+    <div class="module-card" id="mc-s1-r"><div class="module-header" onclick="toggleMod('mc-s1-r')"><div class="module-icon" style="background:rgba(6,182,212,0.12);color:#06b6d4">📖</div><div class="module-meta"><div class="module-name">Reading + Sentence Meaning</div><div class="module-desc">اضغط أي كلمة · اضغط الجملة للترجمة</div></div><div class="module-arrow">▾</div></div><div class="module-body"><div class="reading-panel"><div class="read-toolbar"><span class="rt-label">🔊 Read:</span><button class="rt-btn" onclick="readFull('rtxt-s1',0.7,this)">🐢 Slow</button><button class="rt-btn" onclick="readFull('rtxt-s1',1,this)">🚶 Normal</button><button class="rt-btn" onclick="readFull('rtxt-s1',1.4,this)">⚡ Fast</button><div class="rt-divider"></div><button class="rt-btn danger" onclick="stopAll()">■ Stop</button></div><div class="reading-text-box"><div class="reading-text" id="rtxt-s1"></div><div id="sent-tip-s1" class="sentence-tip"><div class="st-en" id="st-en-s1"></div><div class="st-ar" id="st-ar-s1"></div><button class="st-play-btn" onclick="speakText(document.getElementById('st-en-s1').textContent,1)">🔊 Listen</button></div></div><div class="translation-box"><div class="tb-label">Arabic Translation</div><div class="tb-text" id="tr-s1"></div></div></div></div></div>
+    <div class="module-card" id="mc-s1-l"><div class="module-header" onclick="toggleMod('mc-s1-l')"><div class="module-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b">🎧</div><div class="module-meta"><div class="module-name">Listening Comprehension</div><div class="module-desc">استمع ثم أجب</div></div><div class="module-arrow">▾</div></div><div class="module-body"><div class="listening-panel"><div class="listen-player"><div class="listen-title">LISTENING TRACK</div><button class="listen-main-btn" id="lmb-s1" onclick="playListen('s1',this)">▶</button><div class="listen-speeds"><button class="ls-btn" onclick="setListenSpeed('s1',0.65,this)">🐢 0.65×</button><button class="ls-btn active" onclick="setListenSpeed('s1',1,this)">Normal</button><button class="ls-btn" onclick="setListenSpeed('s1',1.3,this)">⚡ 1.3×</button></div><div class="listen-hint">استمع أولاً قبل الإجابة</div></div><div class="listen-questions" id="lq-s1"></div></div></div></div>
+    <div class="module-card" id="mc-s1-g"><div class="module-header" onclick="toggleMod('mc-s1-g')"><div class="module-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b">📐</div><div class="module-meta"><div class="module-name">Grammar Rules</div><div class="module-desc">قواعد أفعال الوجوب والنصيحة</div></div><div class="module-arrow">▾</div></div><div class="module-body"><div class="grammar-panel" id="gp-s1"></div></div></div>
+    <div class="module-card" id="mc-s1-d"><div class="module-header" onclick="toggleMod('mc-s1-d')"><div class="module-icon" style="background:rgba(236,72,153,0.1);color:#ec4899">💬</div><div class="module-meta"><div class="module-name">Dialogue</div><div class="module-desc">اضغط للسماع والترجمة</div></div><div class="module-arrow">▾</div></div><div class="module-body"><div class="dialogue-panel" id="dp-s1"></div></div></div>
+    <div class="module-card" id="mc-s1-q"><div class="module-header" onclick="toggleMod('mc-s1-q')"><div class="module-icon" style="background:rgba(34,197,94,0.1);color:#22c55e">❓</div><div class="module-meta"><div class="module-name">Practice Questions (10)</div><div class="module-desc">اختيار متعدد + تعبئة الفراغ</div></div><div class="module-arrow">▾</div></div><div class="module-body"><div class="questions-panel" id="qp-s1"></div><div class="score-banner" id="sb-s1"><div class="score-circle" id="sc-s1"></div><div class="score-label" id="sl-s1"></div></div></div></div>
+  </div>
+
+  <!-- ══════════ SESSION 2 – CONTINUOUS ══════════ -->
+  <div class="session-panel" id="sp-2">
+    <div class="session-hero" data-label="03" style="background:linear-gradient(135deg,#431407,#9a3412)">
+      <div class="hero-tag">Session 03 · Continuous Tenses</div>
+      <div class="hero-title">Past & Present Continuous</div>
+      <div class="hero-desc">المضارع المستمر والماضي المستمر – نصف ما كان يحدث في لحظة بعينها في الماضي أو الحاضر</div>
+      <div class="hero-chips"><span class="hero-chip">was/were + -ing</span><span class="hero-chip">am/is/are + -ing</span><span class="hero-chip">10 Questions</span></div>
+      <div class="hero-progress"><div class="hero-progress-bar"><div class="hero-progress-fill" id="hp-2"></div></div><div class="hero-progress-label" id="hpl-2">0 / 10</div></div>
+    </div>
+    <div class="module-card open" id="mc-s2-v"><div class="module-header" onclick="toggleMod('mc-s2-v')"><div class="module-icon" style="background:rgba(249,115,22,0.12);color:#f97316">📚</div><div class="module-meta"><div class="module-name">Vocabulary</div><div class="module-desc">14 كلمة – اضغط للسماع</div></div><div class="module-arrow">▾</div></div><div class="module-body"><div class="vocab-grid" id="vg-s2"></div></div></div>
+    <div class="module-card" id="mc-s2-r"><div class="module-header" onclick="toggleMod('mc-s2-r')"><div class="module-icon" style="background:rgba(6,182,212,0.12);color:#06b6d4">📖</div><div class="module-meta"><div class="module-name">Reading + Sentence Meaning</div><div class="module-desc">اضغط أي كلمة · اضغط الجملة</div></div><div class="module-arrow">▾</div></div><div class="module-body"><div class="reading-panel"><div class="read-toolbar"><span class="rt-label">🔊 Read:</span><button class="rt-btn" onclick="readFull('rtxt-s2',0.7,this)">🐢 Slow</button><button class="rt-btn" onclick="readFull('rtxt-s2',1,this)">🚶 Normal</button><button class="rt-btn" onclick="readFull('rtxt-s2',1.4,this)">⚡ Fast</button><div class="rt-divider"></div><button class="rt-btn danger" onclick="stopAll()">■ Stop</button></div><div class="reading-text-box"><div class="reading-text" id="rtxt-s2"></div><div id="sent-tip-s2" class="sentence-tip"><div class="st-en" id="st-en-s2"></div><div class="st-ar" id="st-ar-s2"></div><button class="st-play-btn" onclick="speakText(document.getElementById('st-en-s2').textContent,1)">🔊 Listen</button></div></div><div class="translation-box"><div class="tb-label">Arabic Translation</div><div class="tb-text" id="tr-s2"></div></div></div></div></div>
+    <div class="module-card" id="mc-s2-l"><div class="module-header" onclick="toggleMod('mc-s2-l')"><div class="module-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b">🎧</div><div class="module-meta"><div class="module-name">Listening Comprehension</div><div class="module-desc">استمع ثم أجب</div></div><div class="module-arrow">▾</div></div><div class="module-body"><div class="listening-panel"><div class="listen-player"><div class="listen-title">LISTENING TRACK</div><button class="listen-main-btn" id="lmb-s2" onclick="playListen('s2',this)">▶</button><div class="listen-speeds"><button class="ls-btn" onclick="setListenSpeed('s2',0.65,this)">🐢 0.65×</button><button class="ls-btn active" onclick="setListenSpeed('s2',1,this)">Normal</button><button class="ls-btn" onclick="setListenSpeed('s2',1.3,this)">⚡ 1.3×</button></div><div class="listen-hint">استمع أولاً قبل الإجابة</div></div><div class="listen-questions" id="lq-s2"></div></div></div></div>
+    <div class="module-card" id="mc-s2-g"><div class="module-header" onclick="toggleMod('mc-s2-g')"><div class="module-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b">📐</div><div class="module-meta"><div class="module-name">Grammar Rules</div><div class="module-desc">قواعد الأزمنة المستمرة</div></div><div class="module-arrow">▾</div></div><div class="module-body"><div class="grammar-panel" id="gp-s2"></div></div></div>
+    <div class="module-card" id="mc-s2-d"><div class="module-header" onclick="toggleMod('mc-s2-d')"><div class="module-icon" style="background:rgba(236,72,153,0.1);color:#ec4899">💬</div><div class="module-meta"><div class="module-name">Dialogue</div><div class="module-desc">اضغط للسماع والترجمة</div></div><div class="module-arrow">▾</div></div><div class="module-body"><div class="dialogue-panel" id="dp-s2"></div></div></div>
+    <div class="module-card" id="mc-s2-q"><div class="module-header" onclick="toggleMod('mc-s2-q')"><div class="module-icon" style="background:rgba(34,197,94,0.1);color:#22c55e">❓</div><div class="module-meta"><div class="module-name">Practice Questions (10)</div><div class="module-desc">اختيار متعدد + تعبئة الفراغ</div></div><div class="module-arrow">▾</div></div><div class="module-body"><div class="questions-panel" id="qp-s2"></div><div class="score-banner" id="sb-s2"><div class="score-circle" id="sc-s2"></div><div class="score-label" id="sl-s2"></div></div></div></div>
+  </div>
+
+  <!-- ══════════ SESSION 3 – CONDITIONALS ══════════ -->
+  <div class="session-panel" id="sp-3">
+    <div class="session-hero" data-label="04" style="background:linear-gradient(135deg,#1e1b4b,#5b21b6)">
+      <div class="hero-tag">Session 04 · Conditionals</div>
+      <div class="hero-title">Conditional Sentences – Type 1 & 2</div>
+      <div class="hero-desc">جمل الشرط من النوع الأول والثاني – نتحدث عن المواقف الحقيقية والافتراضية وعواقبها</div>
+      <div class="hero-chips"><span class="hero-chip">If + present → will</span><span class="hero-chip">If + past → would</span><span class="hero-chip">10 Questions</span></div>
+      <div class="hero-progress"><div class="hero-progress-bar"><div class="hero-progress-fill" id="hp-3"></div></div><div class="hero-progress-label" id="hpl-3">0 / 10</div></div>
+    </div>
+    <div class="module-card open" id="mc-s3-v"><div class="module-header" onclick="toggleMod('mc-s3-v')"><div class="module-icon" style="background:rgba(139,92,246,0.15);color:#a78bfa">📚</div><div class="module-meta"><div class="module-name">Vocabulary</div><div class="module-desc">14 كلمة – اضغط للسماع</div></div><div class="module-arrow">▾</div></div><div class="module-body"><div class="vocab-grid" id="vg-s3"></div></div></div>
+    <div class="module-card" id="mc-s3-r"><div class="module-header" onclick="toggleMod('mc-s3-r')"><div class="module-icon" style="background:rgba(6,182,212,0.12);color:#06b6d4">📖</div><div class="module-meta"><div class="module-name">Reading + Sentence Meaning</div><div class="module-desc">اضغط أي كلمة · اضغط الجملة</div></div><div class="module-arrow">▾</div></div><div class="module-body"><div class="reading-panel"><div class="read-toolbar"><span class="rt-label">🔊 Read:</span><button class="rt-btn" onclick="readFull('rtxt-s3',0.7,this)">🐢 Slow</button><button class="rt-btn" onclick="readFull('rtxt-s3',1,this)">🚶 Normal</button><button class="rt-btn" onclick="readFull('rtxt-s3',1.4,this)">⚡ Fast</button><div class="rt-divider"></div><button class="rt-btn danger" onclick="stopAll()">■ Stop</button></div><div class="reading-text-box"><div class="reading-text" id="rtxt-s3"></div><div id="sent-tip-s3" class="sentence-tip"><div class="st-en" id="st-en-s3"></div><div class="st-ar" id="st-ar-s3"></div><button class="st-play-btn" onclick="speakText(document.getElementById('st-en-s3').textContent,1)">🔊 Listen</button></div></div><div class="translation-box"><div class="tb-label">Arabic Translation</div><div class="tb-text" id="tr-s3"></div></div></div></div></div>
+    <div class="module-card" id="mc-s3-l"><div class="module-header" onclick="toggleMod('mc-s3-l')"><div class="module-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b">🎧</div><div class="module-meta"><div class="module-name">Listening Comprehension</div><div class="module-desc">استمع ثم أجب</div></div><div class="module-arrow">▾</div></div><div class="module-body"><div class="listening-panel"><div class="listen-player"><div class="listen-title">LISTENING TRACK</div><button class="listen-main-btn" id="lmb-s3" onclick="playListen('s3',this)">▶</button><div class="listen-speeds"><button class="ls-btn" onclick="setListenSpeed('s3',0.65,this)">🐢 0.65×</button><button class="ls-btn active" onclick="setListenSpeed('s3',1,this)">Normal</button><button class="ls-btn" onclick="setListenSpeed('s3',1.3,this)">⚡ 1.3×</button></div><div class="listen-hint">استمع أولاً قبل الإجابة</div></div><div class="listen-questions" id="lq-s3"></div></div></div></div>
+    <div class="module-card" id="mc-s3-g"><div class="module-header" onclick="toggleMod('mc-s3-g')"><div class="module-icon" style="background:rgba(245,158,11,0.12);color:#f59e0b">📐</div><div class="module-meta"><div class="module-name">Grammar Rules</div><div class="module-desc">قواعد جمل الشرط</div></div><div class="module-arrow">▾</div></div><div class="module-body"><div class="grammar-panel" id="gp-s3"></div></div></div>
+    <div class="module-card" id="mc-s3-d"><div class="module-header" onclick="toggleMod('mc-s3-d')"><div class="module-icon" style="background:rgba(236,72,153,0.1);color:#ec4899">💬</div><div class="module-meta"><div class="module-name">Dialogue</div><div class="module-desc">اضغط للسماع والترجمة</div></div><div class="module-arrow">▾</div></div><div class="module-body"><div class="dialogue-panel" id="dp-s3"></div></div></div>
+    <div class="module-card" id="mc-s3-q"><div class="module-header" onclick="toggleMod('mc-s3-q')"><div class="module-icon" style="background:rgba(34,197,94,0.1);color:#22c55e">❓</div><div class="module-meta"><div class="module-name">Practice Questions (10)</div><div class="module-desc">اختيار متعدد + تعبئة الفراغ</div></div><div class="module-arrow">▾</div></div><div class="module-body"><div class="questions-panel" id="qp-s3"></div><div class="score-banner" id="sb-s3"><div class="score-circle" id="sc-s3"></div><div class="score-label" id="sl-s3"></div></div></div></div>
+  </div>
+
+  </div><!-- end content-area -->
+</div><!-- end main-content -->
+</div><!-- end app-shell -->
+
+<script src="script.js"></script>
+</body>
+</html>
